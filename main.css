@@ -1,0 +1,81 @@
+body {
+    font-family: 'Amatic SC', cursive;
+}
+
+a:hover,
+a:visited,
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+#start_game {
+    
+}
+
+h1, h2 {
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 5em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 4em;
+}
+
+.players img {
+    height: 200px;
+    margin: 5%;
+}
+
+.players {
+    height: 400px;
+    text-align: center;
+}
+
+#grid {
+    margin: 0 auto;
+    width: 513px;
+    height: 513px;
+    display: none;
+}
+
+.cell {
+    height: 165px;
+    width: 165px;
+    border: solid 3px black;
+    float: left;
+    background-size: contain;
+}
+
+#who_wins {
+    display: none;
+
+}
+
+#declare_winner,
+#tie_game {
+    margin: auto;
+    width: 400px;
+    height: 400px;
+    background-size: contain;
+}
+
+#declare_winner {
+    background-image: url("img/o.png");
+}
+
+#tie_game {
+    background-image: url("img/tie.png");
+}
+
+#declare_winner h1,
+#tie_game h1 {
+    margin: auto 0;
+    padding: 149.5px 0;
+    font-size: 7em;
+}
