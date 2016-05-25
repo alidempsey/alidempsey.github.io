@@ -28,7 +28,7 @@ function check_winner () {
             document.getElementById("who_wins").style.display = "inline-block";
             document.getElementById("tie_game").style.display = "none";
             document.getElementById("grid").style.float = "left";
-            return;
+            return true;
 
         }
         if ( x_spaces.indexOf(win[i][0]) !== -1 && x_spaces.indexOf(win[i][1]) !== -1 && x_spaces.indexOf(win[i][2]) !== -1 ) {
@@ -39,16 +39,17 @@ function check_winner () {
             document.getElementById("tie_game").style.display = "none";
             document.getElementById("grid").style.float = "left";
             document.getElementById("declare_winner").style.backgroundImage = "url(img/x.png)";
-            return;
+            return true;
 
         }
         if ( o_spaces.length + x_spaces.length >= 9) {
+            // tie game!
             document.getElementById("grid").style.margin = "0 100px";
             document.getElementById("start_game").style.display = "none";
             document.getElementById("who_wins").style.display = "inline-block";
             document.getElementById("grid").style.float = "left";
             document.getElementById("declare_winner").style.display = "none";
-            return;
+            return true;
 
         }
     }
@@ -74,30 +75,33 @@ function one_player_game () {
             var index = parseInt(this.id);
 
             if ( this.style.backgroundImage === 'url("img/o.png")' || this.style.backgroundImage === 'url("img/x.png")' ) {
+
             } else {
 
                 this.style.backgroundImage = 'url("img/o.png")';
                 this.style.backgroundSize = "contain";
                 o_spaces.push(index);
                 console.log("clicked for o");
-                check_winner();
-            // x is always "computer"; picks a random # 1-9, if backgroundImage = "", puts x.png, break
-                if ( o_spaces.length + x_spaces.length < 9) {
-                    while (true) {
-                    var random = Math.floor((Math.random() * 9) + 1);
-                    var x_cell = document.getElementById(random);
+                if ( !check_winner() ) {
 
-                        if ( x_cell.style.backgroundImage === "" ) {
+                    if ( o_spaces.length + x_spaces.length < 9 ) {
+                        while (true) {
+                        var random = Math.floor((Math.random() * 9) + 1);
+                        var x_cell = document.getElementById(random);
 
-                            x_cell.style.backgroundImage = 'url("img/x.png")';
-                            x_cell.style.backgroundSize = "contain";
-                            x_spaces.push(random);
-                            console.log("clicked for x");
-                            break;
+                            if ( x_cell.style.backgroundImage === "" ) {
+
+                                x_cell.style.backgroundImage = 'url("img/x.png")';
+                                x_cell.style.backgroundSize = "contain";
+                                x_spaces.push(random);
+                                console.log("clicked for x");
+                                break;
+                            }
                         }
                     }
                 }
             }
+
             check_winner();
         }
     }
