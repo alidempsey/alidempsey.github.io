@@ -33,7 +33,9 @@ function show_grid() {
 function check_winner () {
     //compare current "o" occupied spaces to an array holding all winning combinations
     for ( i = 0; i < win.length; i++ ) {
+        
         if ( o_spaces.indexOf(win[i][0]) !== -1 && o_spaces.indexOf(win[i][1]) !== -1 && o_spaces.indexOf(win[i][2]) !== -1 ) {
+            console.log("o has won");
             // o wins! move grid to left, show the "o wins" text and pic
             document.getElementById("start_game").style.display = "none";
             document.getElementById("grid").style.margin = "0 100px";
@@ -41,9 +43,10 @@ function check_winner () {
             document.getElementById("tie_game").style.display = "none";
             document.getElementById("who_wins").style.display = "inline-block";
             return true;
-
         }
+        
         if ( x_spaces.indexOf(win[i][0]) !== -1 && x_spaces.indexOf(win[i][1]) !== -1 && x_spaces.indexOf(win[i][2]) !== -1 ) {
+            console.log("x has won");
             // x wins! move grid to left, show the "x wins" text and pic
             document.getElementById("start_game").style.display = "none";
             document.getElementById("grid").style.margin = "0 100px";
@@ -52,19 +55,22 @@ function check_winner () {
             document.getElementById("who_wins").style.display = "inline-block";
             document.getElementById("declare_winner").style.backgroundImage = "url(img/x.png)";
             return true;
-
-        }
-        if ( o_spaces.length + x_spaces.length >= 9) {
-            // tie game! move grid to left, show the "its a tie" text and pic
-            document.getElementById("start_game").style.display = "none";
-            document.getElementById("grid").style.margin = "0 100px";
-            document.getElementById("grid").style.float = "left";
-            document.getElementById("who_wins").style.display = "inline-block";
-            document.getElementById("declare_winner").style.display = "none";
-            return true;
         }
     }
+
+    if ( o_spaces.length + x_spaces.length == 9) {
+        console.log("tie game");
+        // tie game! move grid to left, show the "its a tie" text and pic
+        document.getElementById("start_game").style.display = "none";
+        document.getElementById("grid").style.margin = "0 100px";
+        document.getElementById("grid").style.float = "left";
+        document.getElementById("who_wins").style.display = "inline-block";
+        document.getElementById("declare_winner").style.display = "none";
+        return true;
+    }
+    return false;
 }
+
 /* 
 One player game vs. computer.
 Player is always "o" and always goes first.
